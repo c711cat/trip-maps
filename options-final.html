@@ -56,6 +56,14 @@
                     aria-label="select example"
                   >
                     <option selected value="" disabled>瀏覽紀錄</option>
+                    <option
+                      v-for="(records, index) in browseLog"
+                      :key="records + index"
+                      selected
+                      :value="records.Name"
+                    >
+                      {{ index + 1 }}.{{ records.Name }}
+                    </option>
                   </select>
                   <label for="cacheArea">瀏覽紀錄</label>
                 </div>
@@ -139,6 +147,15 @@
                   return this.farData.filter((item) => {
                     return item.Name.match(this.cacheSearch);
                   });
+                },
+              },
+              watch: {
+                cacheArea(n, o) {
+                  this.browseLog.push(n);
+                  console.log(this.browseLog);
+                  if (this.browseLog.length > 10) {
+                    this.browseLog.splice(0, 1);
+                  }
                 },
               },
               mounted() {
