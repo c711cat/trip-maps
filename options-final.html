@@ -78,12 +78,6 @@
           </div>
 
           <script>
-            const apiUrl =
-              "https://raw.githubusercontent.com/hexschool/KCGTravel/master/datastore_search.json";
-
-            axios.get(apiUrl).then((res) => {
-              // 取得遠端資料
-            });
             const App = {
               data() {
                 return {
@@ -119,7 +113,20 @@
                   cacheArea: "",
                   cacheSearch: "",
                   browseLog: [],
+                  farData: {},
                 };
+              },
+              methods: {
+                getFarData() {
+                  const apiUrl =
+                    "https://raw.githubusercontent.com/hexschool/KCGTravel/master/datastore_search.json";
+                  axios.get(apiUrl).then((res) => {
+                    this.farData = res.data.result.records;
+                  });
+                },
+              },
+              mounted() {
+                this.getFarData();
               },
             };
 
