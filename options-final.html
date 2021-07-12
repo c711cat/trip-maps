@@ -134,15 +134,15 @@
                   this.cacheArea = area;
                 },
               },
-              mounted() {
-                this.getFarData();
-              },
               computed: {
                 filterArea() {
                   return this.farData.filter((item) => {
                     return item.Name.match(this.cacheSearch);
                   });
                 },
+              },
+              mounted() {
+                this.getFarData();
               },
             };
 
