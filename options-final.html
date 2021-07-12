@@ -38,6 +38,7 @@
                     class="list-group-item"
                   >
                     <input
+                      @click="clickArea(area)"
                       class="form-check-input me-1"
                       type="radio"
                       name="area"
@@ -59,9 +60,9 @@
                 </div>
                 <div class="card overflow-auto">
                   <img
-                    :src="datastore.Picture1"
+                    :src="cacheArea.Picture1"
                     class="card-img-top"
-                    :alt="datastore.Name"
+                    :alt="cacheArea.Name"
                   />
                   <iframe
                     width="100%"
@@ -70,11 +71,11 @@
                     scrolling="no"
                     marginheight="0"
                     marginwidth="0"
-                    :src="`https://maps.google.com.tw/maps?f=q&hl=zh-TW&geocode=&q=${datastore.Py},${datastore.Px}(${datastore.Name})&z=16&output=embed`"
+                    :src="`https://maps.google.com.tw/maps?f=q&hl=zh-TW&geocode=&q=${cacheArea.Py},${cacheArea.Px}(${cacheArea.Name})&z=16&output=embed`"
                   ></iframe>
                   <div class="card-body">
-                    <h5 class="card-title">{{ datastore.Name }}</h5>
-                    <p>{{ datastore.Description }}</p>
+                    <h5 class="card-title">{{ cacheArea.Name }}</h5>
+                    <p>{{ cacheArea.Description }}</p>
                   </div>
                 </div>
               </div>
@@ -127,6 +128,9 @@
                   axios.get(apiUrl).then((res) => {
                     this.farData = res.data.result.records;
                   });
+                },
+                clickArea(area) {
+                  this.cacheArea = area;
                 },
               },
               mounted() {
