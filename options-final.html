@@ -24,6 +24,7 @@
               <div class="col-md-3 h-100 d-flex flex-column">
                 <div class="form-floating mb-2">
                   <input
+                    v-model="cacheSearch"
                     type="text"
                     class="form-control"
                     id="search"
@@ -33,7 +34,7 @@
                 </div>
                 <div class="list-group option">
                   <label
-                    v-for="area in farData"
+                    v-for="area in  (filterArea || farData)"
                     :key="area.Name"
                     class="list-group-item"
                   >
@@ -118,7 +119,7 @@
                   cacheArea: "",
                   cacheSearch: "",
                   browseLog: [],
-                  farData: {},
+                  farData: [],
                 };
               },
               methods: {
@@ -135,6 +136,13 @@
               },
               mounted() {
                 this.getFarData();
+              },
+              computed: {
+                filterArea() {
+                  return this.farData.filter((item) => {
+                    return item.Name.match(this.cacheSearch);
+                  });
+                },
               },
             };
 
