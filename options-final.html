@@ -32,13 +32,17 @@
                   <label for="search">search</label>
                 </div>
                 <div class="list-group option">
-                  <label class="list-group-item">
+                  <label
+                    v-for="area in farData"
+                    :key="area.Name"
+                    class="list-group-item"
+                  >
                     <input
                       class="form-check-input me-1"
                       type="radio"
                       name="area"
                     />
-                    {{ datastore.Name }}
+                    {{ area.Name }}
                   </label>
                 </div>
               </div>
