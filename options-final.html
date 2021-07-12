@@ -67,7 +67,7 @@
                   </select>
                   <label for="cacheArea">瀏覽紀錄</label>
                 </div>
-                <div class="card overflow-auto">
+                <div v-if="status" class="card overflow-auto">
                   <img
                     :src="cacheArea.Picture1"
                     class="card-img-top"
@@ -87,6 +87,7 @@
                     <p>{{ cacheArea.Description }}</p>
                   </div>
                 </div>
+                <div v-else class="card overflow-auto">請選擇場域</div>
               </div>
             </div>
           </div>
@@ -128,6 +129,7 @@
                   cacheSearch: "",
                   browseLog: [],
                   farData: [],
+                  status: false,
                 };
               },
               methods: {
@@ -139,6 +141,7 @@
                   });
                 },
                 clickArea(area) {
+                  this.status = true;
                   this.cacheArea = area;
                 },
               },
