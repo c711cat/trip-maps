@@ -51,6 +51,7 @@
               <div class="col-md-8 h-100 d-flex flex-column">
                 <div class="form-floating">
                   <select
+                    @change="changeArea"
                     id="cacheArea"
                     class="form-select w-50 mb-2"
                     aria-label="select example"
@@ -144,6 +145,13 @@
                   this.status = true;
                   this.cacheArea = area;
                 },
+                changeArea(e) {
+                  this.browseLog.forEach((item) => {
+                    if (e.target.value === item.Name) {
+                      this.cacheArea = item;
+                    }
+                  });
+                },
               },
               computed: {
                 filterArea() {
@@ -155,7 +163,6 @@
               watch: {
                 cacheArea(n, o) {
                   this.browseLog.push(n);
-                  console.log(this.browseLog);
                   if (this.browseLog.length > 10) {
                     this.browseLog.splice(0, 1);
                   }
